@@ -10,7 +10,7 @@ public class InputView {
     private final InputParser inputParser = new InputParser();
     private final InputValidator inputValidator = new InputValidator();
 
-    public Map<Integer, String> readStart() {
+    public Map<Integer, String> readCastInfo() {
         String input = Console.readLine();
         return inputParser.parseCastInfo(input);
     }
