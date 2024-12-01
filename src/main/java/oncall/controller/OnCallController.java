@@ -14,10 +14,11 @@ public class OnCallController {
 
     public void run() {
         Map<Integer, String> castInfo = requireCastInfo();
-        List<String> weekdaysWorkers = requireWeekdaysWorkers();
-        List<String> weekendsWorkers = requireWeekendsWorkers();
-        Workers workers = workersGenerator.generateWorkers(weekdaysWorkers, weekendsWorkers);
-
+        List<String> weekdaysWorkersName = requireWeekdaysWorkers();
+        List<String> weekendsWorkersName = requireWeekendsWorkers();
+        Workers workers = workersGenerator.generateWorkers(weekdaysWorkersName, weekendsWorkersName);
+        Workers weekdaysWorkers = new Workers(workers.sortedByWeekdaysIdx());
+        Workers weekendsWorkers = new Workers(workers.sortedByWeekendsIdx());
     }
 
     //만약 월요일부터 근무를 배치한다

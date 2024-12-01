@@ -20,4 +20,12 @@ public class Worker {
         }
     }
 
+    public int getWeekdaysNumber() {
+        return weekdaysNumber;
+    }
+
+    public int getWeekendsNumber() {
+        return weekendsNumber;
+    }
+
 }
