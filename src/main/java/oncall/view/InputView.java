@@ -2,6 +2,7 @@ package oncall.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
+import java.util.Map;
 import oncall.exception.InputValidator;
 import oncall.util.InputParser;
 
@@ -9,7 +10,7 @@ public class InputView {
     private final InputParser inputParser = new InputParser();
     private final InputValidator inputValidator = new InputValidator();
 
-    public List<String> readStart() {
+    public Map<Integer, String> readStart() {
         String input = Console.readLine();
         return inputParser.parseCastInfo(input);
     }
