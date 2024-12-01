@@ -40,12 +40,16 @@
 - controller
 
 - domain
-
+    - Worker
+      - 평일 순번, 휴일 순번을 상태값으로 가진다
+    - Workers
+    - OnCallManager (편성하는 역할)
+    - OnCall (배정표 상태 저장)
 - exception
     - InputValidator
         - 입력된 문자열에 대한 예외를 처리한다.
 - util
-
+    - WorkerGenerator
 - view
     - InputView
         - 입력을 담당한다.

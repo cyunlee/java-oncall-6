@@ -1,6 +1,7 @@
 package oncall.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 import oncall.exception.InputValidator;
 import oncall.util.InputParser;
 
@@ -10,16 +11,19 @@ public class InputView {
 
     public String readStart() {
         String input = Console.readLine();
+        List<String> parsedCastInfo = inputParser.parseCastInfo(input);
         return input;
     }
 
     public String readWeekdays() {
         String input = Console.readLine();
+        List<String> parsedWeekdaysWorkers = inputParser.parsedWeekdaysWorkers(input);
         return input;
     }
 
     public String readWeekends() {
         String input = Console.readLine();
+        List<String> parsedWeekendsWorkers = inputParser.parseWeekendsWorkers(input);
         return input;
     }
 
