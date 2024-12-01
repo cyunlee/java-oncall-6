@@ -10,6 +10,10 @@ public class Workers implements Iterable<Worker> {
     private List<Worker> weekdaysWorkers = new ArrayList<>();
     private List<Worker> weekendsWorkers = new ArrayList<>();
 
+    public Workers() {
+
+    }
+
     public Workers(List<Worker> workers) {
         this.workers = workers;
     }
