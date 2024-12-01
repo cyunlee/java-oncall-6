@@ -4,21 +4,20 @@ public class Worker {
     private String nickname;
     private int weekdaysNumber;
     private int weekendsNumber;
-    private boolean workOnWeekdays;
-    private boolean workOnWeekends;
 
-    public Worker(String nickname, int weekdaysNumber, int weekendsNumber) {
+    public Worker(String nickname, int weekdaysNumber) {
         this.nickname = nickname;
         this.weekdaysNumber = weekdaysNumber;
-        this.weekendsNumber = weekendsNumber;
+    }
 
-        if (weekdaysNumber!=0) {
-            this.workOnWeekdays = true;
-        }
-        if (weekendsNumber!=0) {
-            this.workOnWeekends = true;
+    //수아, 랄라, 포비, 시윤
+    //랄라, 수아, 시윤, 포비
+
+    //평일과 휴일 무조건 한 번씩 배정되기 때문에 평일 먼저 추가하고 그다음에 weekendr순번 값을 modify하는 식으로
+    public void modifyWorkerInfo(String nickname, int weekendNumber) {
+        if (nickname.equals(this.nickname)) {
+            this.weekendsNumber = weekendNumber;
         }
     }
 
-    //만약 workOnWeekdays, workOnWeekends가 이미 true라면 더이상 생성할 수 없도록.
 }

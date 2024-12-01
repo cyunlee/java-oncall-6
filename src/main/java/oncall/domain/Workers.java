@@ -7,7 +7,7 @@ import java.util.List;
 public class Workers implements Iterable<Worker> {
     private List<Worker> workers = new ArrayList<>();
 
-    public List<Worker> addLotto(Worker worker) {
+    public List<Worker> addWorker(Worker worker) {
         workers.add(worker);
         return workers;
     }
