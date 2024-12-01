@@ -21,9 +21,11 @@ public class OnCallController {
         Workers weekendsWorkers = new Workers(workers.sortedByWeekendsIdx());
     }
 
-    //만약 월요일부터 근무를 배치한다
-    //월, 화, 수, 목, 금 -> 사이클 : 5
-    //토요일, 일요일, 법정 공휴일
+
+    //만약 5월 월요일부터 배치한다면~
+    // 월 화 수 목 금  5명 평일 순번 끝나고 휴일 순번 2명 끝나고 5명 평일 순번~
+    //만약 5월 수요일부터 배치한다면~
+    // 수 목 금 3명 평일 순번 끝나고 휴일 순번 2명 끝나고 5명 순번 ~
 
 
     private Map<Integer, String> requireCastInfo() {
