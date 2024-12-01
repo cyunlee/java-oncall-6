@@ -3,7 +3,7 @@ package oncall.domain;
 import java.util.List;
 
 public class WorkerGenerator {
-    public Workers generateWorker(List<String> weekdaysWorkersNames, List<String> weekendsWorkersNames) {
+    public Workers generateWorkers(List<String> weekdaysWorkersNames, List<String> weekendsWorkersNames) {
         Workers workers = new Workers();
 
         int weekdaysIdx = 1;

@@ -1,7 +1,5 @@
 package oncall.domain;
 
-import java.time.LocalDate;
-
 public enum Holiday {
     JAN(1,1),
     MAR(3,1),

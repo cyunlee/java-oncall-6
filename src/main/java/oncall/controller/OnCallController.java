@@ -3,6 +3,7 @@ package oncall.controller;
 import java.util.List;
 import java.util.Map;
 import oncall.domain.WorkerGenerator;
+import oncall.domain.Workers;
 import oncall.view.InputView;
 import oncall.view.OutputView;
 
@@ -15,6 +16,8 @@ public class OnCallController {
         Map<Integer, String> castInfo = requireCastInfo();
         List<String> weekdaysWorkers = requireWeekdaysWorkers();
         List<String> weekendsWorkers = requireWeekendsWorkers();
+        Workers workers = workersGenerator.generateWorkers(weekdaysWorkers, weekendsWorkers);
+
     }
 
     //만약 월요일부터 근무를 배치한다
