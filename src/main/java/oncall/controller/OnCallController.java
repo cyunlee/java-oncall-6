@@ -17,6 +17,10 @@ public class OnCallController {
         List<String> weekendsWorkers = requireWeekendsWorkers();
     }
 
+    //만약 월요일부터 근무를 배치한다
+    //월, 화, 수, 목, 금 -> 사이클 : 5
+    //토요일, 일요일, 법정 공휴일
+
 
     private Map<Integer, String> requireCastInfo() {
         outputView.printCastInfoPrompt();
