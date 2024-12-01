@@ -9,22 +9,19 @@ public class InputView {
     private final InputParser inputParser = new InputParser();
     private final InputValidator inputValidator = new InputValidator();
 
-    public String readStart() {
+    public List<String> readStart() {
         String input = Console.readLine();
-        List<String> parsedCastInfo = inputParser.parseCastInfo(input);
-        return input;
+        return inputParser.parseCastInfo(input);
     }
 
-    public String readWeekdays() {
+    public List<String> readWeekdays() {
         String input = Console.readLine();
-        List<String> parsedWeekdaysWorkers = inputParser.parsedWeekdaysWorkers(input);
-        return input;
+        return inputParser.parsedWeekdaysWorkers(input);
     }
 
-    public String readWeekends() {
+    public List<String> readWeekends() {
         String input = Console.readLine();
-        List<String> parsedWeekendsWorkers = inputParser.parseWeekendsWorkers(input);
-        return input;
+        return inputParser.parseWeekendsWorkers(input);
     }
 
 //    public String readInput() {
