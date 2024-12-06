@@ -50,17 +50,7 @@ public class OnCall {
         return Month.findMonth(month).getLastDay();
     }
 
-    private int calculateStartDateIdx() {
-        int dateIdx = 1;
-        for (int i=1; i<=7; i++) {
-            if (startDate.equals(dates.get(i))) {
-                dateIdx = i;
-            }
-        }
-        return dateIdx;
-    }
-
-    private Map<Integer, Integer> castDatesToDays() {
+    public Map<Integer, Integer> castDatesToDays() {
         int startDateIdx = calculateStartDateIdx();
         int numberOfDays = calculateNumberOfDays();
 
@@ -75,6 +65,16 @@ public class OnCall {
         }
 
         return DatesToDays;
+    }
+
+    private int calculateStartDateIdx() {
+        int dateIdx = 0;
+        for (int i=0; i<7; i++) {
+            if (startDate.equals(dates.get(i))) {
+                dateIdx = i+1;
+            }
+        }
+        return dateIdx;
     }
 
 }

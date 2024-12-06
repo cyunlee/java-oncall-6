@@ -1,5 +1,9 @@
 package oncall.view;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import oncall.domain.Workers;
+
 public class OutputView {
     private final static String ERROR = "[ERROR] ";
 
@@ -13,6 +17,14 @@ public class OutputView {
 
     public void printWeekendWorkersPrompt() {
         System.out.println("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요>");
+    }
+
+    public void printOnCallResult(int month, Map<Integer, String> calendar, Workers castedWorkers) {
+        int workerIdx = 1;
+        for (Entry<Integer, String> entry : calendar.entrySet()) {
+            System.out.println(String.format("%d월 %d일 %s %s", month, entry.getKey(), entry.getValue(), castedWorkers.getWorker(workerIdx).getName()));
+            workerIdx++;
+        }
     }
 
     public static void printError(String message) {

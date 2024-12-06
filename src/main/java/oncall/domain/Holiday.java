@@ -19,7 +19,7 @@ public enum Holiday {
         this.day = day;
     }
 
-    public boolean isTodayHoliday(int month, int day) {
+    public static boolean isTodayHoliday(int month, int day) {
         Holiday holiday = Arrays.stream(values()).filter(value -> value.month == month && value.day == day).findAny().orElse(null);
         if (holiday != null) {
             return true;

@@ -17,7 +17,11 @@ public class Workers implements Iterable<Worker> {
     }
 
     public Worker getWorker(int index) {
-        return workers.get(index);
+        return workers.get(index-1);
+    }
+
+    public Worker getLastWorker() {
+        return workers.get(getSize()-1);
     }
 
     @Override

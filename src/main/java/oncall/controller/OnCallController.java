@@ -1,9 +1,11 @@
 package oncall.controller;
 
 import java.time.DayOfWeek;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import oncall.domain.Holiday;
 import oncall.domain.OnCall;
 import oncall.domain.Worker;
 import oncall.domain.WorkerGenerator;
@@ -28,35 +30,49 @@ public class OnCallController {
         Workers weekendWorkers = generateWeekendWorkers();
         OnCall onCall = new OnCall(month, startDate);
         Workers castedWorkers = castWorkers(onCall, weekdayWorkers, weekendWorkers);
-
-
+        Map<Integer, String> convertedDates = convertDateIdxToReal(onCall.castDatesToDays());
+        showOnCall(month, convertedDates, castedWorkers);
     }
 
-    public Workers generateWeekdayWorkers() {
+    private Workers generateWeekdayWorkers() {
         return workerGenerator.generateWorker(requireWeekdayWorkers());
     }
 
-    public Workers generateWeekendWorkers() {
+    private Workers generateWeekendWorkers() {
         return workerGenerator.generateWorker(requireWeekendWorkers());
     }
 
-    public Workers castWorkers(OnCall onCall, Workers weekdayWorkers, Workers weekendWorkers) {
+    private Workers castWorkers(OnCall onCall, Workers weekdayWorkers, Workers weekendWorkers) {
         int numberOfDays = onCall.calculateNumberOfDays();
         int numberOfWorkers = weekdayWorkers.getSize();
         int weekdayIdx = 1;
         int weekendIdx = 1;
         Workers castedWorkers = new Workers();
         for (int day=1; day<=numberOfDays; day++) {
-            if(onCall.isTodayWeekday(day)) {
+            if(onCall.isTodayWeekday(day) && !Holiday.isTodayHoliday(month, day)) {
                 Worker worker = weekdayWorkers.getWorker(weekdayIdx);
+                if (castedWorkers.getSize() >= 1 && castedWorkers.getLastWorker().equals(worker)) {
+                    worker = weekdayWorkers.getWorker(weekdayIdx+1);
+                }
                 castedWorkers.addWorker(worker);
                 weekdayIdx++;
                 if (weekdayIdx == numberOfWorkers) {
                     weekdayIdx = 1;
                 }
             }
+            if (onCall.isTodayWeekday(day) && Holiday.isTodayHoliday(month, day)) {
+                Worker worker = weekendWorkers.getWorker(weekendIdx);
+                if (castedWorkers.getSize() >= 1 && castedWorkers.getLastWorker().equals(worker)) {
+                    worker = weekendWorkers.getWorker(weekendIdx+1);
+                }
+                castedWorkers.addWorker(worker);
+                weekendIdx++;
+            }
             if(onCall.isTodayWeekend(day)) {
                 Worker worker = weekendWorkers.getWorker(weekendIdx);
+                if (castedWorkers.getSize() >=1 && castedWorkers.getLastWorker().equals(worker)) {
+                    worker = weekendWorkers.getWorker(weekendIdx+1);
+                }
                 castedWorkers.addWorker(worker);
                 weekendIdx++;
                 if (weekendIdx == numberOfWorkers) {
@@ -67,6 +83,37 @@ public class OnCallController {
         return castedWorkers;
     }
 
+    private Map<Integer, String> convertDateIdxToReal(Map<Integer, Integer> castedDates) {
+        Map<Integer, String> convertedDateIdxToReal = new HashMap<>();
+        for (Entry<Integer, Integer> entry : castedDates.entrySet()) {
+            if (entry.getValue()==1) {
+                convertedDateIdxToReal.put(entry.getKey(), "월");
+            }
+            if (entry.getValue()==2) {
+                convertedDateIdxToReal.put(entry.getKey(), "화");
+            }
+            if (entry.getValue()==3) {
+                convertedDateIdxToReal.put(entry.getKey(), "수");
+            }
+            if (entry.getValue()==4) {
+                convertedDateIdxToReal.put(entry.getKey(), "목");
+            }
+            if (entry.getValue()==5) {
+                convertedDateIdxToReal.put(entry.getKey(), "금");
+            }
+            if (entry.getValue()==6) {
+                convertedDateIdxToReal.put(entry.getKey(), "토");
+            }
+            if (entry.getValue()==7) {
+                convertedDateIdxToReal.put(entry.getKey(), "일");
+            }
+        }
+        return convertedDateIdxToReal;
+    }
+
+    private void showOnCall(int month, Map<Integer, String> calendar, Workers castedWorkers) {
+        outputView.printOnCallResult(month, calendar, castedWorkers);
+    }
 
     private Map<Integer, String> requireMonthAndDate() {
         outputView.printMonthAndDatePrompt();
