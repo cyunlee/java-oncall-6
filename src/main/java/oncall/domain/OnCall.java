@@ -46,6 +46,10 @@ public class OnCall {
         return false;
     }
 
+    public int calculateNumberOfDays() {
+        return Month.findMonth(month).getLastDay();
+    }
+
     private int calculateStartDateIdx() {
         int dateIdx = 1;
         for (int i=1; i<=7; i++) {
@@ -54,10 +58,6 @@ public class OnCall {
             }
         }
         return dateIdx;
-    }
-
-    private int calculateNumberOfDays() {
-        return Month.findMonth(month).getLastDay();
     }
 
     private Map<Integer, Integer> castDatesToDays() {
