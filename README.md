@@ -6,7 +6,8 @@
 ## 기능 목록
 
 ### 주요 기능
-- [ ] 입력 값 기반으로 worker, workers 객체 생성하기
+- [x] 입력 값 기반으로 worker, workers 객체 생성하기
+- [ ] weekday, weekend workers 생성하기
 - [ ] 입력 값에 따라 근무자 배정하기
 
 ### 입력

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class WorkerGenerator {
 
-    public Workers generatorWorker(List<String> workers) {
+    public Workers generateWorker(List<String> workers) {
         Workers generatedWorkers = new Workers();
 
         for (int i = 0; i < workers.size(); i++) {
