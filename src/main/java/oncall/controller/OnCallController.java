@@ -1,5 +1,6 @@
 package oncall.controller;
 
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -10,7 +11,7 @@ import oncall.view.OutputView;
 
 public class OnCallController {
     private int month;
-    private String date;
+    private String startDate;
     private final WorkerGenerator workerGenerator = new WorkerGenerator();
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
@@ -19,12 +20,13 @@ public class OnCallController {
         Map<Integer, String> monthAndDate = requireMonthAndDate();
         for (Entry<Integer, String> entry : monthAndDate.entrySet()) {
             month = entry.getKey();
-            date = entry.getValue();
+            startDate = entry.getValue();
         }
         Workers weekdayWorkers = generateWeekdayWorkers();
         Workers weekendWorkers = generateWeekendWorkers();
-
     }
+
+
 
     public Workers generateWeekdayWorkers() {
         return workerGenerator.generateWorker(requireWeekdayWorkers());
