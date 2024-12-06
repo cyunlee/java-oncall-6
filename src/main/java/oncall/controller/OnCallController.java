@@ -1,6 +1,7 @@
 package oncall.controller;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,8 @@ public class OnCallController {
         OnCall onCall = new OnCall(month, startDate);
         Workers castedWorkers = castWorkers(onCall, weekdayWorkers, weekendWorkers);
         Map<Integer, String> convertedDates = convertDateIdxToReal(onCall.castDatesToDays());
-        showOnCall(month, convertedDates, castedWorkers);
+        List<Integer> foundHolidays = findDayHolidayAndWeekday(onCall, month, onCall.castDatesToDays());
+        showOnCall(month, convertedDates, castedWorkers, foundHolidays);
     }
 
     private Workers generateWeekdayWorkers() {
@@ -111,8 +113,18 @@ public class OnCallController {
         return convertedDateIdxToReal;
     }
 
-    private void showOnCall(int month, Map<Integer, String> calendar, Workers castedWorkers) {
-        outputView.printOnCallResult(month, calendar, castedWorkers);
+    private List<Integer> findDayHolidayAndWeekday(OnCall onCall, int month, Map<Integer, Integer> castedDates) {
+        List<Integer> foundHolidays = new ArrayList<>();
+        for (Entry<Integer, Integer> entry : castedDates.entrySet()) {
+            if (onCall.isTodayWeekday(entry.getKey()) && Holiday.isTodayHoliday(month, entry.getKey())) {
+                foundHolidays.add(entry.getKey());
+            }
+        }
+        return foundHolidays;
+    }
+
+    private void showOnCall(int month, Map<Integer, String> calendar, Workers castedWorkers, List<Integer> foundHolidays) {
+        outputView.printOnCallResult(month, calendar, castedWorkers, foundHolidays);
     }
 
     private Map<Integer, String> requireMonthAndDate() {
